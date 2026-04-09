@@ -41,6 +41,39 @@ mmk youtube videotype <youtube-url>
 - `mmk paymint ...` — 사용 불가
 - `mmk threads ...` — 사용 불가
 
+## 한국 증시 YouTube 모니터링 시스템
+
+등록된 YouTube 채널에서 키워드 기반으로 영상을 필터링하고, 자막 추출 → 요약 → Slack 알림 + Notion 저장을 자동으로 수행합니다.
+
+### 사용 가능한 스킬
+
+| 스킬 | 설명 |
+|------|------|
+| `/monitor` | 전체 모니터링 파이프라인 실행 (새 영상 확인 → 처리) |
+| `/process-video` | 단일 영상 처리 (자막 추출 → 요약 → Slack → Notion) |
+| `/notify-slack` | Slack 채널에 영상 요약 전송 |
+| `/save-notion` | Notion 데이터베이스에 영상 데이터 저장 |
+
+### 스케줄링
+
+```
+/loop 60m /monitor
+```
+
+### 설정 파일
+
+- `config/config.json` — 채널 목록, 필터 키워드, Slack/Notion ID
+- `data/processed_videos.json` — 처리 완료된 영상 ID (중복 방지)
+
+### Python 스크립트
+
+- `scripts/fetch_new_videos.py` — RSS 피드 수집 + 키워드 필터 + 중복 체크
+- `scripts/mark_processed.py` — 영상 처리 완료 기록
+
+### 채널/키워드 추가
+
+`config/config.json`의 `channels` 배열에 새 채널을 추가하거나, `filter.keywords`에 키워드를 추가합니다.
+
 ## 세션 시작 시
 
 세션이 시작되면 `.claude/scripts/check-env.sh` 스크립트가 자동 실행되어 환경 정보를 출력합니다:

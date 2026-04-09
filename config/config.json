@@ -1,0 +1,20 @@
+{
+  "channels": [
+    {
+      "id": "UCWskYkV4c4S9D__rsfOl2JA",
+      "name": "한국증시채널",
+      "enabled": true
+    }
+  ],
+  "filter": {
+    "keywords": ["시황", "전망", "분석"],
+    "exclude_shorts": true,
+    "max_age_hours": 2
+  },
+  "slack": {
+    "channel_name": "cc-workshop"
+  },
+  "notion": {
+    "database_id": "22d5e72f6457805c9eb6fc7630458740"
+  }
+}
